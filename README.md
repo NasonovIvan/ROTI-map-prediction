@@ -11,7 +11,9 @@ In this paper, the daily prediction of ROTI cards is implemented using machine l
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
 
-> Data source: https://lasp.colorado.edu/home/our-expertise/science/space-weather/
+> Global data source:
+> https://lasp.colorado.edu/home/our-expertise/science/space-weather/
+> https://wdc.kugi.kyoto-u.ac.jp/wdc/Sec3.html
 
 - The **Kp index**, or the planetary K index, is considered a proxy for the energy input from the solar wind to Earth. It is based on the geomagnetic effects of solar particles, the local K values, as measured by ground-based magnetometers around the world at geomagnetic latitudes between 44 degrees and 60 degrees (northern or southern). The higher the Kp value, the stronger the geomagnetic disturbance. **Ap Index** - the 3-hourly ap (equivalent range) index is derived from the Kp index.
 > Source: ftp://ftp.gfz-potsdam.de/pub/home/obs/kp-ap/wdc/yearly/
