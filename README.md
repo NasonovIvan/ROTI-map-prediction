@@ -12,15 +12,16 @@ In this paper, the daily prediction of ROTI cards is implemented using machine l
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
 
 > Global data source:
-> https://lasp.colorado.edu/home/our-expertise/science/space-weather/
-> https://wdc.kugi.kyoto-u.ac.jp/wdc/Sec3.html
+> - https://lasp.colorado.edu/home/our-expertise/science/space-weather/
+> - https://wdc.kugi.kyoto-u.ac.jp/wdc/Sec3.html
 
 - The **Kp index**, or the planetary K index, is considered a proxy for the energy input from the solar wind to Earth. It is based on the geomagnetic effects of solar particles, the local K values, as measured by ground-based magnetometers around the world at geomagnetic latitudes between 44 degrees and 60 degrees (northern or southern). The higher the Kp value, the stronger the geomagnetic disturbance. **Ap Index** - the 3-hourly ap (equivalent range) index is derived from the Kp index.
 > Source: ftp://ftp.gfz-potsdam.de/pub/home/obs/kp-ap/wdc/yearly/
 
 - The **Dst index** provides a quantitative measure of geomagnetic disturbance. It is derived from a network of geomagnetic observatories near the Earth's geomagnetic equator that map to the globally symmetrical equatorial electrojet (the "ring current"). The lower the Dst value, the stronger the geomagnetic disturbance. Positive variations in Dst are mostly caused by the compression of the magnetosphere from solar wind pressure increases.
-> Source: https://wdc.kugi.kyoto-u.ac.jp/dst_provisional/index.html
-> Source: https://wdc.kugi.kyoto-u.ac.jp/dst_final/index.html
+> Source:
+> - https://wdc.kugi.kyoto-u.ac.jp/dst_provisional/index.html
+> - https://wdc.kugi.kyoto-u.ac.jp/dst_final/index.html
 
 - Penticton Solar Radio **Flux at 10.7 cm** - is an excellent indicator of solar activity. Often called the F10.7 index, it is one of the longest running records of solar activity. The F10.7 radio emissions originates high in the chromosphere and low in the corona of the solar atmosphere. The F10.7 correlates well with the sunspot number as well as a number of UltraViolet (UV) and visible solar irradiance records.
 > Source: ftp://ftp.seismo.nrcan.gc.ca/spaceweather/solar_flux/daily_flux_values/fluxtable.txt
