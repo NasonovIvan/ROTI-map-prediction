@@ -31,3 +31,9 @@ We want to take data period from 2010 to 2020 years for training our NN. In data
 
 - **IMF-BZ** - The interplanetary magnetic field (IMF) plays a huge rule in how the solar wind interacts with Earth’s magnetosphere. The Bx and By components are not important for auroral activity and are therefor not featured on our website. The third component, the Bz value is perpendicular to the ecliptic and is created by waves and other disturbances in the solar wind. For a geomagnetic storm to develop it is vital that the direction of the interplanetary magnetic field (Bz) turns southward. Continues values of -10nT and lower are good indicators that a geomagnetic storm could develop but the lower this value goes the better it is for auroral activity.
 > Source: https://omniweb.gsfc.nasa.gov/form/dx1.html
+
+#### ROTI maps
+
+> Source:
+> - From where data should be downloaded: https://cddis.nasa.gov/Data_and_Derived_Products/GNSS/atmospheric_products.html
+> - How data should be downloaded: https://cddis.nasa.gov/Data_and_Derived_Products/CDDIS_Archive_Access.html
