@@ -3,6 +3,7 @@
 #Check which files directory doesnt have and how many
 
 sum=0
+count=0
 for (( year=2010; year <= 2020; year++ ))
 do
 	day=1
@@ -21,7 +22,7 @@ do
 		fi
         FILE=roti"$day_string"0."$end_year"f
         if test -f "$FILE"; then
-            i=1
+            count=$[ $count + 1 ]
         else
             echo "$FILE not exists."
             sum=$[ $sum + 1 ]
@@ -30,4 +31,5 @@ do
 	done
 done
 
-echo "All counts of files: $sum"
+echo "All counts of files: $count"
+echo "All counts of not existed files: $sum"
