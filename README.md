@@ -22,6 +22,25 @@ Now let's plot similar graphs for indexes:
 <img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
 <img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/>
 
+It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
+
+There is a problem of lack of data for neural network training, because the total amount of data is just below 4000. To solve this difficulty, we will use the generation of new data by adding noise to the index values obtained using the Ornstein–Uhlenbeck process:
+
+$$dx_t = \theta(\mu - x_t)dt + \sigma dW_t$$
+
+After that, we will get a little more than 11,000 data, which is already enough for training and testing a neural network.
+
+The neural network will consist of two LSTM layers with L1 regularization coefficients, as well as an output layer of Dense. The learning process optimizer is Adam with a variable learning rate, and the loss function is MSE.
+
+The graph of the decreasing loss function can be seen in the figure below:
+
+![Loss function](/images/loss_train.jpeg "Loss function train")
+
+Neural network prediction results (right images):
+
+<img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
+<img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/>
+
 ### Indexes
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
