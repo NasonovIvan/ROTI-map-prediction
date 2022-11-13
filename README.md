@@ -18,7 +18,9 @@ In the figure below, we will plot the arithmetic mean of the ROTI maps for each 
 
 Now let's plot similar graphs for indexes:
 
-![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020")
+<!-- ![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020") -->
+<img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
+<img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
 
 ### Indexes
 
