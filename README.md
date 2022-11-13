@@ -1,13 +1,26 @@
 # ROTI-map-forecast
 Neural network for daily prediction of the ROTI map
 
-### Abstract
+## Abstract
 
 ROTI (index of rate of total electron content (TEC) change) maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions, in general, the ROTI values are corresponded to the probability of the GPS signals phase fluctuations.
 
 In this paper, the daily prediction of ROTI cards is implemented using machine learning methods.
 
-#### Indexes
+## Main part
+
+We will use the data of the ROTI maps for 2010-2020. Let's analyze these data, as well as index data for a similar time and try to find correlations.
+
+In the figure below, we will plot the arithmetic mean of the ROTI maps for each day, for a month and a moving average for 400 days:
+
+![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
+<img src="/images/data_roti.jpeg" alt="ROTI data for 2010-2020" width="200"/>
+
+Now let's plot similar graphs for indexes:
+
+![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020")
+
+### Indexes
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
 
