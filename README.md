@@ -41,6 +41,10 @@ Neural network prediction results (right images):
 <img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
 <img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/>
 
+Work on this project continues - it is necessary to add AU, AL indexes; test different neural network architectures; add a 27-day median for F10-7 data.
+
+Publication is planned based on the results of this work.
+
 ### Indexes
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
