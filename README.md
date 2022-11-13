@@ -14,13 +14,13 @@ We will use the data of the ROTI maps for 2010-2020. Let's analyze these data, a
 In the figure below, we will plot the arithmetic mean of the ROTI maps for each day, for a month and a moving average for 400 days:
 
 ![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
-<img src="/images/data_roti.jpeg" alt="ROTI data for 2010-2020" width="200"/>
 
 Now let's plot similar graphs for indexes:
 
 <!-- ![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020") -->
 <img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
 <img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
+<img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/>
 
 ### Indexes
 
