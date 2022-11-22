@@ -1,13 +1,51 @@
 # ROTI-map-forecast
 Neural network for daily prediction of the ROTI map
 
-### Abstract
+## Abstract
 
 ROTI (index of rate of total electron content (TEC) change) maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions, in general, the ROTI values are corresponded to the probability of the GPS signals phase fluctuations.
 
 In this paper, the daily prediction of ROTI cards is implemented using machine learning methods.
 
-#### Indexes
+## Main part
+
+We will use the data of the ROTI maps for 2010-2020. Let's analyze these data, as well as index data for a similar time and try to find correlations.
+
+In the figure below, we will plot the arithmetic mean of the ROTI maps for each day, for a month and a moving average for 400 days:
+
+![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
+
+Now let's plot similar graphs for indexes:
+
+<!-- ![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020") -->
+<img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
+<img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
+<img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/>
+
+It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
+
+There is a problem of lack of data for neural network training, because the total amount of data is just below 4000. To solve this difficulty, we will use the generation of new data by adding noise to the index values obtained using the Ornstein–Uhlenbeck process:
+
+$$dx_t = \theta(\mu - x_t)dt + \sigma dW_t$$
+
+After that, we will get a little more than 11,000 data, which is already enough for training and testing a neural network.
+
+The neural network will consist of two LSTM layers with L1 regularization coefficients, as well as an output layer of Dense. The learning process optimizer is Adam with a variable learning rate, and the loss function is MSE.
+
+The graph of the decreasing loss function can be seen in the figure below:
+
+![Loss function](/images/loss_train.jpeg "Loss function train")
+
+Neural network prediction results (right images):
+
+<img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
+<img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/>
+
+Work on this project continues - it is necessary to add AU, AL indexes; test different neural network architectures; add a 27-day median for F10-7 data.
+
+Publication is planned based on the results of this work.
+
+### Indexes
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
 
