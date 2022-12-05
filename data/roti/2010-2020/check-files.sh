@@ -4,7 +4,7 @@
 
 sum=0
 count=0
-for (( year=2010; year <= 2020; year++ ))
+for (( year=2010; year <= 2022; year++ ))
 do
 	day=1
 	end_year=${year: -2}

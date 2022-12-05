@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Download all data from 2010 to 2020 years. Time about ~6 hours
-for (( year=2010; year <= 2020; year++ ))
+for (( year=2010; year <= 2022; year++ ))
 do
 	day=1
 	end_year=${year: -2}
