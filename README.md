@@ -24,6 +24,9 @@ Now let's plot similar graphs for indexes:
 
 It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
 
+Let's analyze the data using Principal Component Analysis (PCA). It can be seen that there is no need to reduce the dimension of the data.
+![PCA](/images/pca.jpeg "PCA")
+
 There is a problem of lack of data for neural network training, because the total amount of data is just below 4000. To solve this difficulty, we will use the generation of new data by adding noise to the index values obtained using the Ornstein–Uhlenbeck process:
 
 $$dx_t = \theta(\mu - x_t)dt + \sigma dW_t$$
@@ -34,16 +37,18 @@ The neural network will consist of two LSTM layers with L1 regularization coeffi
 
 The graph of the decreasing loss function can be seen in the figure below:
 
-![Loss function](/images/loss_train.jpeg "Loss function train")
+![Loss function](/images/train_loss.jpeg "Loss function train")
 
 Neural network prediction results (right images):
 
-<img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
-<img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/>
+![ROTI map](/images/result_1.jpeg "ROTI map prediction")
+![ROTI map](/images/result_2.jpeg "ROTI map prediction")
+![ROTI map](/images/result_3.jpeg "ROTI map prediction")
 
-Work on this project continues - it is necessary to add AU, AL indexes; test different neural network architectures; add a 27-day median for F10-7 data.
+<!-- <img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
+<img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/> -->
 
-Publication is planned based on the results of this work.
+Work on this project continues - an article about this work will be published in the MDPI journal.
 
 ### Indexes
 
