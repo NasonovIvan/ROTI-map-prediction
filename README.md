@@ -58,7 +58,10 @@ Let's check the number of components selected for their use in neural network tr
 
 Now it is necessary to check the cross-correlation of the data. In the figure below you can see the constructed matrix of cross-correlation of indices. It can be seen that the greatest correlation with the average value of the ROTI map is present between the values of F10.7 and the maximum value of scalar B. The negative correlation of the minimum value of the BZ index is explained by the fact that the lower this index, the more ionospheric irregularities occur, which means that the average value of the ROTI index is higher. From the correlation of the minimum BZ index of the current day and 27 days ago, it can be seen that our assumption about the 27-day correlation period is correct. It is also possible to observe an inverse correlation of the indices of maximum B and minimum BZ.
 
-<img src="/images/cross-matrix-num.pdf" alt="Cross-Cor-Matrix" width="400"/>
+<object data="/images/cross-matrix-num.pdf" type="Cross-Cor-Matrix/pdf" width="50%"> 
+</object>
+
+<!-- <img src="/images/cross-matrix-num.pdf" alt="Cross-Cor-Matrix" width="400"/> -->
 
 The graph of the decreasing loss function can be seen in the figure below:
 
