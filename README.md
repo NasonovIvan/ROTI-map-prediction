@@ -63,6 +63,8 @@ Now it is necessary to check the cross-correlation of the data. In the figure be
 
 <embed src="/images/cross-matrix-num.pdf" type="Cross-Cor-Matrix/pdf">
 
+![](cross-matrix-num.pdf)
+
 <!-- <img src="/images/cross-matrix-num.pdf" alt="Cross-Cor-Matrix" width="400"/> -->
 
 The graph of the decreasing loss function can be seen in the figure below:
