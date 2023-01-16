@@ -3,26 +3,28 @@ Neural network for daily prediction of the ROTI map
 
 ## Abstract
 
-ROTI (index of rate of total electron content (TEC) change) maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions, in general, the ROTI values are corresponded to the probability of the GPS signals phase fluctuations.
+ROTI (index of Rate of Total Electron Content (TEC) change) maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions, in general, the ROTI values are corresponded to the probability of the GPS signals phase fluctuations.
 
-In this paper, the daily prediction of ROTI cards is implemented using machine learning methods.
+The purpose of this study is to develop a neural network model, the learning result of which will predict the Rate of TEC Index (ROTI) map for the day ahead.
 
 ## Main part
 
-We will use the data of the ROTI maps for 2010-2020. Let's analyze these data, as well as index data for a similar time and try to find correlations.
+Methodologically, the study of the problem is divided into two stages. At the first stage, a detailed analysis of the data is carried out, as well as their preparation for the neural network training process. At the second stage, the neural network architecture is being developed, hyperparameters are being selected and the model is being improved.
 
-In the figure below, we will plot the arithmetic mean of the ROTI maps for each day, for a month and a moving average for 400 days:
+Solar and geomagnetic activity tend to be repeated with a 27-day period. This in turn affects the ROTI index itself, which is also subject to cyclical behavior. Based on these dependencies, we assumed that data for the current day and 27 days ago may correlate and help track periodic changes and anomalies.
 
-![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
+As a result of the first stage, a data set was created in which we used the values of the 10.7 cm solar radio flux (F10.7), scalar B, BZ and the values of the ROTI map for the currentday. From the F10.7 index, its average value for each day was obtained, as well as 27-day median values for each day, because the average data has large changes from day to day. Themaximum values of the scalar B index and the minimum values of the BZ index for each day were also added to the dataset. Each ROTI map has 3600 index values - it is inefficient to addall the values to the training set, since the training time and the required power will increase. Therefore, the average index value for each ROTI map was calculated and this number wasadded to the dataset. 
 
-Now let's plot similar graphs for indexes:
+<!-- ![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020") -->
+
+<!-- Now let's plot similar graphs for indexes: -->
 
 <!-- ![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020") -->
-<img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
+<!-- <img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
 <img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
-<img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/>
+<img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/> -->
 
-It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
+<!-- It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
 
 Let's analyze the data using Principal Component Analysis (PCA). It can be seen that there is no need to reduce the dimension of the data.
 ![PCA](/images/pca.jpeg "PCA")
@@ -33,7 +35,30 @@ $$dx_t = \theta(\mu - x_t)dt + \sigma dW_t$$
 
 After that, we will get a little more than 11,000 data, which is already enough for training and testing a neural network.
 
-The neural network will consist of two LSTM layers with L1 regularization coefficients, as well as an output layer of Dense. The learning process optimizer is Adam with a variable learning rate, and the loss function is MSE.
+The neural network will consist of two LSTM layers with L1 regularization coefficients, as well as an output layer of Dense. The learning process optimizer is Adam with a variable learning rate, and the loss function is MSE. -->
+
+It should be noted that the average value of the F10.7 index, the maximum value of scalar B, the minimum value of the BZ index were added to the dataset not only for the current day, but also for the day that was 27 days ago, as well as the minimum value of the BZ index for the next day. The final contents of the dataset can be seen in the table:
+
+| Index |                  Data                      |
+| :-----: | :--------------------------------------- |
+|   0   | average value of the F10.7                 |
+|   1   | F10.7 27-days median                       |
+|   2   | average value of the F10.7 27 days ago     |
+|   3   | maximum value of the scalar B              |
+|   4   | maximum value of the scalar B 27 days ago  |
+|   5   | minimum value of the BZ                    |
+|   6   | minimum value of the BZ 27 days ago        |
+|   7   | minimum value of the BZ next day           |
+|   8   | average value of the ROTI in the whole map |
+
+Let's check the number of components selected for their use in neural network training. To do this, use Principal Component Analysis (PCA). To begin with, let's look at the ratio of variance and the number of components explaining it for all these indices, shown in the figures below. It can be seen that we do not have excessive information in the data, and although it is possible to describe the data with components 6 and 7 with an accuracy above 90%, we will not do this, since the impact on the training process will be insignificant.
+
+![PCA](/images/pca.jpeg "PCA")
+<img src="/images/pca_bar.pdf" alt="PCA" width="400"/>
+
+Now it is necessary to check the cross-correlation of the data. In the figure below you can see the constructed matrix of cross-correlation of indices. It can be seen that the greatest correlation with the average value of the ROTI map is present between the values of F10.7 and the maximum value of scalar B. The negative correlation of the minimum value of the BZ index is explained by the fact that the lower this index, the more ionospheric irregularities occur, which means that the average value of the ROTI index is higher. From the correlation of the minimum BZ index of the current day and 27 days ago, it can be seen that our assumption about the 27-day correlation period is correct. It is also possible to observe an inverse correlation of the indices of maximum B and minimum BZ.
+
+<img src="/images/cross-matrix-num.pdf" alt="Cross-Cor-Matrix" width="400"/>
 
 The graph of the decreasing loss function can be seen in the figure below:
 
