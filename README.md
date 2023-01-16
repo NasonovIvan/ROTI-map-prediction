@@ -54,11 +54,11 @@ It should be noted that the average value of the F10.7 index, the maximum value 
 Let's check the number of components selected for their use in neural network training. To do this, use Principal Component Analysis (PCA). To begin with, let's look at the ratio of variance and the number of components explaining it for all these indices, shown in the figures below. It can be seen that we do not have excessive information in the data, and although it is possible to describe the data with components 6 and 7 with an accuracy above 90%, we will not do this, since the impact on the training process will be insignificant.
 
 ![PCA](/images/pca.jpeg "PCA")
-<img src="/images/pca_bar.jpeg" alt="PCA_bar" width="400"/>
+<img src="/images/pca_bar.jpeg" alt="PCA_bar"/>
 
 Now it is necessary to check the cross-correlation of the data. In the figure below you can see the constructed matrix of cross-correlation of indices. It can be seen that the greatest correlation with the average value of the ROTI map is present between the values of F10.7 and the maximum value of scalar B. The negative correlation of the minimum value of the BZ index is explained by the fact that the lower this index, the more ionospheric irregularities occur, which means that the average value of the ROTI index is higher. From the correlation of the minimum BZ index of the current day and 27 days ago, it can be seen that our assumption about the 27-day correlation period is correct. It is also possible to observe an inverse correlation of the indices of maximum B and minimum BZ.
 
-<img src="/images/cross-matrix-num.jpeg" alt="Cross-Cor-Matrix" width="400"/>
+<img src="/images/cross-matrix-num.jpeg" alt="Cross-Cor-Matrix" width="800"/>
 
 For training and validation of the model, we used data from 1/1/2010 to 1/1/2020. But in this set there are important examples on which we would like to test the work of our neural network - these are the data intervals from 13/3/2015 to 17/3/2015 and from 18/6/2015 to 24/6/2015. To obtain reliable results, these data were excluded from the training set and placed in the test set, which also includes data from 2/1/2020 to 19/6/2022.
 
