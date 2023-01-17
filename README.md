@@ -87,7 +87,7 @@ Neural network prediction results (right images):
 
 Work on this project continues - an article about this work will be published in the MDPI journal.
 
-### Indexes
+### Indexes / Data
 
 We want to take data period from 2010 to 2020 years for training our NN. In data from 2021 to 2022 we are going to test our network and analyze the result.
 
