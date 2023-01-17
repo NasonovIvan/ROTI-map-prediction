@@ -1,4 +1,4 @@
-# ROTI-map-forecast
+# ROTI map prediction
 Neural network for daily prediction of the ROTI map
 
 ## Abstract
