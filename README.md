@@ -66,6 +66,8 @@ Now it is necessary to check the cross-correlation of the data. In the figure be
 
 For training and validation of the model, we used data from 1/1/2010 to 1/1/2020. But in this set there are important examples on which we would like to test the work of our neural network - these are the data intervals from 13/3/2015 to 17/3/2015 and from 18/6/2015 to 24/6/2015. To obtain reliable results, these data were excluded from the training set and placed in the test set, which also includes data from 2/1/2020 to 19/6/2022.
 
+To predict the ROTI map, we decided to use data from the previous two days. Moreover, to create the final dataset, we used the shuffle method with a buffer size of 256 elements.
+
 At the second stage of the study of our problem, we determined the architecture of the neural network using the Keras model API.
 
 Recurrent neural networks (RNN) are ideal for working with time series and sequences. In our work, we used the long short-term memory (LSTM) layer, which contains 10 neurons and it is the first layer of our neural network. The LSTM layer is followed by densely-connected layers. We used ADAM as an optimizer for our neural network, and chose the Huber function as a loss function.
