@@ -3,7 +3,11 @@ Neural network for daily prediction of the ROTI map
 
 ## Abstract
 
-ROTI (index of Rate of Total Electron Content (TEC) change) maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions, in general, the ROTI values are corresponded to the probability of the GPS signals phase fluctuations.
+The International GNSS Service (IGS) has accepted for official release a new ionospheric product to characterize ionospheric irregularity and intensity as derived from multi-site ground-based GPS observations. The product represents changes in the GPS-based Rate of Total Electron Content (TEC) Index (ROTI) and has a polar projection within a range of 50°–90°N in geomagnetic latitude and 00–24 magnetic local time.
+
+ROT index is the major parameter in Space Weather that is broadly used as a measure of ionospheric irregularity level. This parameter is highly relevant for users in navigation and communications since strong plasma gradients cause GPS signal degradation or even its loss.
+
+ROTI maps are constructed with the grid of 2° × 2° resolution as a function of the magnetic local time and corrected magnetic latitude. The ROTI maps allow to estimate the overall fluctuation activity and auroral oval evolutions.
 
 The purpose of this study is to develop a neural network model, the learning result of which will predict the Rate of TEC Index (ROTI) map for the day ahead.
 
