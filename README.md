@@ -15,6 +15,12 @@ In the figure below, we will plot the arithmetic mean of the ROTI maps for each 
 
 ![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
 
+Solar and geomagnetic activity tend to be repeated with a 27-day period. This in turn affects the ROTI index itself, which is also subject to cyclical behavior. Based on these dependencies, we assumed that data for the current day and 27 days ago may correlate and help track periodic changes and anomalies.
+
+ As a result of the first stage, a data set was created in which we used the values of the 10.7 cm solar radio flux (F10.7), scalar B, BZ and the values of the ROTI map for the current day. From the F10.7 index, its average value for each day was obtained, as well as 27-day median values for each day, because the average data has large changes from day to day. The maximum values of the scalar B index and the minimum values of the BZ index for each day were also added to the dataset. Each ROTI map has 3600 index values - it is inefficient to add all the values to the training set, since the training time and the required power will increase. Therefore, the average index value for each ROTI map was calculated and this number was added to the dataset. 
+
+It should be noted that the average value of the F10.7 index, the maximum value of scalar B, the minimum value of the BZ index were added to the dataset not only for the current day, but also for the day that was 27 days ago, as well as the minimum value of the BZ index for the next day.
+
 For training and validation of the model, we used data from 1/1/2010 to 1/1/2020. But in this set there are important examples on which we would like to test the work of our neural network - these are the data intervals from 13/3/2015 to 17/3/2015 and from 18/6/2015 to 24/6/2015. To obtain reliable results, these data were excluded from the training set and placed in the test set, which also includes data from 2/1/2020 to 19/6/2022.
 
 To predict the ROTI map, we decided to use data from the previous two days. Moreover, to create the final dataset, we used the shuffle method with a buffer size of 256 elements. This will randomly shuffle the elements of this dataset. Also we used mini-batches with a batch size of 24 elements.
@@ -22,7 +28,7 @@ To predict the ROTI map, we decided to use data from the previous two days. More
 While we were creating a target dataset for a neural network, we realized that predicting 3600 values for each ROTI map complicates the learning process. Therefore, we lowered the dimension of each map by averaging $n$ values, where $n \leqslant 3600$. In the map, we took the first $n$ values, found their average, took the next $n$ values and also found their average, etc. After that, we collected a new data set from these average values, which had a dimension less than 3600, but the visual accuracy of the image of the ROTI map was not lost.
 
 Let's analyze the data using Principal Component Analysis (PCA). It can be seen that there is no need to reduce the dimension of the data.
-![PCA](/images/pca.jpeg "PCA")
+![PCA](/images/pca.jpg "PCA")
 
 In our work, we used the long short-term memory (LSTM) layer, which contains 10 neurons and it is the first layer of our neural network. The LSTM layer is followed by densely-connected layers with the number of neurons 512, 1024, 812 and 720. We specifically made two layers, the number of neurons in which is greater than in the output layer, because we wanted to enable the neural network to identify non-obvious features in the data.
 
