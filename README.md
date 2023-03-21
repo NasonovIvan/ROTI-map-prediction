@@ -15,14 +15,11 @@ In the figure below, we will plot the arithmetic mean of the ROTI maps for each 
 
 ![ROTI data](/images/data_roti.jpeg "ROTI data for 2010-2020")
 
-Now let's plot similar graphs for indexes:
+For training and validation of the model, we used data from 1/1/2010 to 1/1/2020. But in this set there are important examples on which we would like to test the work of our neural network - these are the data intervals from 13/3/2015 to 17/3/2015 and from 18/6/2015 to 24/6/2015. To obtain reliable results, these data were excluded from the training set and placed in the test set, which also includes data from 2/1/2020 to 19/6/2022.
 
-<!-- ![ROTI data](/images/data_kp.jpeg "ROTI data for 2010-2020") -->
-<img src="/images/data_kp.jpeg" alt="KP data for 2010-2020" width="400"/> <img src="/images/data_dst.jpeg" alt="DST data for 2010-2020" width="400"/>
-<img src="/images/data_f107.jpeg" alt="F107 data for 2010-2020" width="400"/> <img src="/images/data_bz.jpeg" alt="IMF-BZ data for 2010-2020" width="400"/>
-<img src="/images/data_plasma.jpeg" alt="Plasma Speed data for 2010-2020" width="400"/> <img src="/images/data_proton.jpeg" alt="Proton Density data for 2010-2020" width="400"/>
+To predict the ROTI map, we decided to use data from the previous two days. Moreover, to create the final dataset, we used the shuffle method with a buffer size of 256 elements. This will randomly shuffle the elements of this dataset. Also we used mini-batches with a batch size of 24 elements.
 
-It is possible to observe a good correlation of the ROTI maps data with the indices F10-7 and IMF-BZ. There is also a weak correlation with the KP index, but for the initial analysis and testing of the success of the forecast, we will use data from the F10-7 and IMF-BZ indices.
+While we were creating a target dataset for a neural network, we realized that predicting 3600 values for each ROTI map complicates the learning process. Therefore, we lowered the dimension of each map by averaging $n$ values, where $n \leqslant 3600$. In the map, we took the first $n$ values, found their average, took the next $n$ values and also found their average, etc. After that, we collected a new data set from these average values, which had a dimension less than 3600, but the visual accuracy of the image of the ROTI map was not lost.
 
 Let's analyze the data using Principal Component Analysis (PCA). It can be seen that there is no need to reduce the dimension of the data.
 ![PCA](/images/pca.jpeg "PCA")
