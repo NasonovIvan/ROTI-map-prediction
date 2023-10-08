@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 from datetime import datetime, timedelta
 import statistics as sts
+import imports as im
 
 # define moving average function
 def moving_avg(x, n):
@@ -473,6 +474,7 @@ def PlotLossAcc(TrainData, ValData, Epochs, TrainLabel, ValLabel, yLabel, filena
     ax.plot(Epochs, ValData, 'g', label=ValLabel)
     ax.set_ylabel(yLabel)
     ax.set_xlabel("Epochs")
+    ax.grid()
     plt.legend()
     pdf.savefig(fig)
     pdf.close()
@@ -514,3 +516,67 @@ def PlotRotiPredictions(start, end, y_pred, x_train_test, roti_map_date, pdf_fil
         # pred_map = roti_decode(pred_map, less_num=5)
         pred_map = pred_map.reshape(20, 180)
         plot_roti_near(date, lons, lats, map, pred_map, pdf_file=pdf_file, WriteFile=WriteFile)
+
+# plot PCA graph
+def plot_PCA(all_indexes, fontname='Times New Roman', filename="../images/pca.pdf"):
+
+    pdf = im.PdfPages(filename)
+    font = im.FontProperties() 
+    font.set_family('serif') 
+    font.set_name(fontname) 
+    font.set_size(16)
+
+    scaler = im.StandardScaler()
+    X_features = scaler.fit_transform(all_indexes)
+
+    pca = im.PCA(n_components=all_indexes.shape[-1])
+    pca.fit(X_features)
+    pca_variance = pca.explained_variance_
+
+    var1 = im.np.cumsum(im.np.round(pca.explained_variance_ratio_, decimals=4))
+
+    fig, ax = im.plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
+    ax[0].plot(var1)
+    ax[0].set_ylabel("Cumulative Variance")
+    ax[0].set_xlabel("Principal components")
+    ax[0].grid()
+
+    ax[1].bar(range(9), pca_variance, alpha=0.5, align='center', label='Individual variance')
+    ax[1].set_ylabel("Variance ratio")
+    ax[1].set_xlabel("Principal components")
+    ax[1].grid()
+
+    im.plt.legend()
+    im.plt.grid()
+    pdf.savefig(fig)
+    pdf.close()
+    im.plt.show()
+
+# plotting the correlation matrix 
+def plot_corr(all_indexes):
+
+    df = im.pd.DataFrame(all_indexes, columns = ['0', '1', '2', '3', '4', '5', '6', '7', '8'])
+
+    # Compute the correlation matrix
+    corr = df.corr()
+
+    # Generate a mask for the upper triangle
+    mask = im.np.triu(im.np.ones_like(corr, dtype=bool))
+
+    # Set up the matplotlib figure
+    fig, ax = im.plt.subplots(figsize=(11, 9))
+
+    # Generate a custom diverging colormap
+    cmap = im.sns.diverging_palette(250, 15, s=75, l=40,
+                                n=9, center="light", as_cmap=True)
+
+    # Draw the heatmap with the mask and correct aspect ratio
+    fig = im.sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.6, center=0, annot=True, 
+                fmt='.2f', square=True, linewidths=.5, cbar_kws={"shrink": .5})
+    text = "0 : average F10-7\n1 : F10-7 27-days median\n2 : average F10-7 27-days ago\n3 : max scalar B\n4 : max scalar B 27-days ago\n5 : min BZ\n6 : min BZ 27-days ago\n7 : min BZ next day\n8 : average ROTI map"
+    im.plt.text(5., 2., text, fontsize=14,
+                # Vertical and horizontal alignment
+                horizontalalignment='left', verticalalignment='center',
+                bbox=dict(facecolor='white', alpha=1.0))
+
+    im.plt.show()
