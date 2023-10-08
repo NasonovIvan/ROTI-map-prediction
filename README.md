@@ -25,10 +25,9 @@ For training and validation of the model, we used data from 1/1/2010 to 1/1/2020
 
 To predict the ROTI map, we decided to use data from the previous two days. Moreover, to create the final dataset, we used the shuffle method with a buffer size of 256 elements. This will randomly shuffle the elements of this dataset. Also we used mini-batches with a batch size of 24 elements.
 
-While we were creating a target dataset for a neural network, we realized that predicting 3600 values for each ROTI map complicates the learning process. Therefore, we lowered the dimension of each map by averaging $n$ values, where $n \leqslant 3600$. In the map, we took the first $n$ values, found their average, took the next $n$ values and also found their average, etc. After that, we collected a new data set from these average values, which had a dimension less than 3600, but the visual accuracy of the image of the ROTI map was not lost.
-
 Let's analyze the data using Principal Component Analysis (PCA). It can be seen that there is no need to reduce the dimension of the data.
-![PCA](/images/pca.jpg "PCA")
+<!-- ![PCA](/images/pca.pdf "PCA") -->
+<img src="/images/pca.pdf" alt="PCA" width="400"/>
 
 In our work, we used the long short-term memory (LSTM) layer, which contains 10 neurons and it is the first layer of our neural network. The LSTM layer is followed by densely-connected layers with the number of neurons 512, 1024, 812 and 720. We specifically made two layers, the number of neurons in which is greater than in the output layer, because we wanted to enable the neural network to identify non-obvious features in the data.
 
@@ -36,18 +35,21 @@ We used ADAM as the optimizer for our neural network with default parameters. We
 
 The graph of the decreasing loss function can be seen in the figure below. The neural network was trained for 80 epochs and during all this time the training loss decreased when the value of validation loss grew slightly and at the end of training it became larger than the first one. This indicates a slight overfitting of the network, but in our case it is quite small and will not affect the final results. However, it can be seen that the validation accuracy does not increase, and even decreases in the middle of the training. Both of these phenomena are caused by a small amount of data, but for this task these facts are not critical and their impact on the final result is small.
 
-![Loss function](/images/train_loss.jpeg "Loss function train")
+<!-- ![Loss function](/images/loss.pdf "Loss function train") -->
+<img src="/images/loss.pdf" alt="Loss function" width="400"/>
 
 Neural network prediction results (right images):
 
-![ROTI map](/images/result_1.jpeg "ROTI map prediction")
-![ROTI map](/images/result_2.jpeg "ROTI map prediction")
-![ROTI map](/images/result_3.jpeg "ROTI map prediction")
+<img src="/images/compare_result.svg.pdf" alt="ROTI map" width="400"/>
+<img src="/images/compare_result_1.svg.pdf" alt="ROTI map" width="500"/>
+<img src="/images/compare_result_2.svg.pdf" alt="ROTI map" width="600"/>
+
+<!-- ![ROTI map](/images/compare_result.svg.pdf "ROTI map prediction")
+![ROTI map](/images/compare_result_1.svg.pdf "ROTI map prediction")
+![ROTI map](/images/compare_result_2.svg.pdf "ROTI map prediction") -->
 
 <!-- <img src="/images/ex_roti_map.jpeg" alt="ROTI map" width="400"/> <img src="/images/1_result.jpeg" alt="ROTI map prediction" width="400"/>
 <img src="/images/2_target.jpeg" alt="ROTI map" width="400"/> <img src="/images/2_result.jpeg" alt="ROTI map prediction" width="400"/> -->
-
-Work on this project continues - an article about this work will be published in the MDPI journal.
 
 ### Indexes
 
