@@ -32,8 +32,8 @@ Let's analyze the data using Principal Component Analysis (PCA). It can be seen 
 The correlation matrix is here too. We can see a strong correlation between some of the indexes.
 ![corr](/images/cross-matrix-num-1.png "corr")
 
-I used InceptionTime network in this work to analyse the series of data. The schema of the network is below.
-![inception](/images/super-res-1-1.png)
+<!-- I used InceptionTime network in this work to analyse the series of data. The schema of the network is below.
+![inception](/images/super-res-1-1.png) -->
 
 We used ADAM as the optimizer for our neural network with default parameters. We chose the Huber function as the loss function because it is less sensitive to outliers in the data than the squared error loss.
 
